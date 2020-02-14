@@ -138,6 +138,7 @@
 			return FALSE
 		forceMove(tongs)
 		tongs.sliver = src
+		tongs.item_state = "clamps_sliver"
 		tongs.update_icon()
 		to_chat(user, "<span class='notice'>You carefully pick up [src] with [tongs].</span>")
 	else if(istype(W, /obj/item/scalpel/supermatter) || istype(W, /obj/item/nuke_core_container/supermatter/)) // we don't want it to dust
@@ -177,6 +178,7 @@
 	sliver = T.sliver
 	T.sliver = null
 	T.icon_state = "supermatter_tongs"
+	T.item_state = "clamps"
 	icon_state = "core_container_loaded"
 	to_chat(user, "<span class='warning'>Container is sealing...</span>")
 	addtimer(CALLBACK(src, .proc/seal), 50)
@@ -227,8 +229,11 @@
 /obj/item/hemostat/supermatter/update_icon_state()
 	if(sliver)
 		icon_state = "supermatter_tongs_loaded"
+		item_state = "clamps_sliver"
+
 	else
 		icon_state = "supermatter_tongs"
+		item_state = "clamps"
 
 /obj/item/hemostat/supermatter/afterattack(atom/O, mob/user, proximity)
 	. = ..()
